@@ -8,12 +8,16 @@ int moisture_led1 = 3;
 int moisture_led2 = 4;
 int moisture_led3 = 5;
 
+int water_valve = 8;
+
 void setup() {
 
   pinMode (moisture_led0,OUTPUT);
   pinMode (moisture_led1,OUTPUT);
   pinMode (moisture_led2,OUTPUT);
   pinMode (moisture_led3,OUTPUT);
+
+  pinMode (water_valve,OUTPUT);
 
   // initialize serial communication:
   Serial.begin(9600);
@@ -35,16 +39,16 @@ void loop()
   // Moist soil is 650 ish
 
   // turn on leds if their cooresponding sensor is wet, turn off if dry
-  sensor_value0 >= 500 ? digitalWrite(moisture_led0, LOW) : digitalWrite(moisture_led0, HIGH);
-  sensor_value1 >= 500 ? digitalWrite(moisture_led1, LOW) : digitalWrite(moisture_led1, HIGH);
-  sensor_value2 >= 500 ? digitalWrite(moisture_led2, LOW) : digitalWrite(moisture_led2, HIGH);
-  sensor_value3 >= 500 ? digitalWrite(moisture_led3, LOW) : digitalWrite(moisture_led3, HIGH);
+  sensor_value0 >= 500 ? digitalWrite(moisture_led0, 0) : digitalWrite(moisture_led0, 1);
+  sensor_value1 >= 500 ? digitalWrite(moisture_led1, 0) : digitalWrite(moisture_led1, 1);
+  sensor_value2 >= 500 ? digitalWrite(moisture_led2, 0) : digitalWrite(moisture_led2, 1);
+  sensor_value3 >= 500 ? digitalWrite(moisture_led3, 0) : digitalWrite(moisture_led3, 1);
 
-  // digitalWrite(moisture_led0, LOW);
-  // digitalWrite(moisture_led1, LOW);
+  bool turned_on = (sensor_value0 < 500) && (sensor_value1 < 500) && (sensor_value2 < 500) && (sensor_value3 < 500);
+  digitalWrite(water_valve, turned_on ? 1 : 0);
+
+
   delay(400);
-  // digitalWrite(moisture_led0, HIGH);
-  // digitalWrite(moisture_led1, HIGH);
 
 }
 
