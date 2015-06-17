@@ -1,8 +1,20 @@
-int mostureSensor = 0;
+int moisture_sensor0 = 0;
+int moisture_sensor1 = 1;
+int moisture_sensor2 = 2;
+int moisture_sensor3 = 3;
+
+int moisture_led0 = 0;
+int moisture_led1 = 1;
+int moisture_led2 = 2;
+int moisture_led3 = 3;
 
 void setup() {
-  pinMode (2,OUTPUT);//attach pin 2 to vcc
-  pinMode (5,OUTPUT);//attach pin 5 to GND
+
+  pinMode (moisture_led0,OUTPUT);
+  pinMode (moisture_led1,OUTPUT);
+  pinMode (moisture_led2,OUTPUT);
+  pinMode (moisture_led3,OUTPUT);
+
   // initialize serial communication:
   Serial.begin(9600);
 }
@@ -10,36 +22,46 @@ void setup() {
 void loop()
 {
 
-  // The same pin is used to read the signal from the PING))): a HIGH
-  // pulse whose duration is the time (in microseconds) from the sending
-  // of the ping to the reception of its echo off of an object.
-  // pinMode (4, INPUT);//attach pin 4 to Echo
-  // duration = pulseIn(4, HIGH);
+  // take moisture readings
+  int sensor_value0 = analogRead(moisture_sensor0);
+  int sensor_value1 = analogRead(moisture_sensor1);
+  int sensor_value2 = analogRead(moisture_sensor2);
+  int sensor_value3 = analogRead(moisture_sensor3);
 
-//   // read the input on analog pin 0:
-  int sensorValue = analogRead(mostureSensor);
-//   // print out the value you read:
-// BONE DRY IS 1021
-// WATER IS ~ 315
-// Moist soil is 650 ish
+  // Sensor Value Rubric
+  // =========================
+  // BONE DRY IS 1021
+  // WATER IS ~ 315
+  // Moist soil is 650 ish
 
- if (sensorValue >= 500)
- {
-  digitalWrite(2, HIGH);
-}
-else
- {
-  digitalWrite(2, LOW);
- }
-
-
-  Serial.println();
-  Serial.println(sensorValue);
+  // turn on leds if their cooresponding sensor is wet, turn off if dry
+  sensorValue0 >= 500 ? digitalWrite(moisture_led0, LOW) : digitalWrite(moisture_led0, HIGH);
+  sensorValue1 >= 500 ? digitalWrite(moisture_led1, LOW) : digitalWrite(moisture_led1, HIGH);
+  sensorValue2 >= 500 ? digitalWrite(moisture_led2, LOW) : digitalWrite(moisture_led2, HIGH);
+  sensorValue3 >= 500 ? digitalWrite(moisture_led3, LOW) : digitalWrite(moisture_led3, HIGH);
 
   delay(400);
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // Serial.println();
+  // Serial.println(sensorValue);
 // */
 // int led1 = 2;
 // int led2 = 3;
