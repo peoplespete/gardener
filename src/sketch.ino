@@ -3,10 +3,10 @@ int moisture_sensor1 = 1;
 int moisture_sensor2 = 2;
 int moisture_sensor3 = 3;
 
-int moisture_led0 = 0;
-int moisture_led1 = 1;
-int moisture_led2 = 2;
-int moisture_led3 = 3;
+int moisture_led0 = 2;
+int moisture_led1 = 3;
+int moisture_led2 = 4;
+int moisture_led3 = 5;
 
 void setup() {
 
@@ -35,12 +35,17 @@ void loop()
   // Moist soil is 650 ish
 
   // turn on leds if their cooresponding sensor is wet, turn off if dry
-  sensorValue0 >= 500 ? digitalWrite(moisture_led0, LOW) : digitalWrite(moisture_led0, HIGH);
-  sensorValue1 >= 500 ? digitalWrite(moisture_led1, LOW) : digitalWrite(moisture_led1, HIGH);
-  sensorValue2 >= 500 ? digitalWrite(moisture_led2, LOW) : digitalWrite(moisture_led2, HIGH);
-  sensorValue3 >= 500 ? digitalWrite(moisture_led3, LOW) : digitalWrite(moisture_led3, HIGH);
+  sensor_value0 >= 500 ? digitalWrite(moisture_led0, LOW) : digitalWrite(moisture_led0, HIGH);
+  sensor_value1 >= 500 ? digitalWrite(moisture_led1, LOW) : digitalWrite(moisture_led1, HIGH);
+  sensor_value2 >= 500 ? digitalWrite(moisture_led2, LOW) : digitalWrite(moisture_led2, HIGH);
+  sensor_value3 >= 500 ? digitalWrite(moisture_led3, LOW) : digitalWrite(moisture_led3, HIGH);
 
+  // digitalWrite(moisture_led0, LOW);
+  // digitalWrite(moisture_led1, LOW);
   delay(400);
+  // digitalWrite(moisture_led0, HIGH);
+  // digitalWrite(moisture_led1, HIGH);
+
 }
 
 
